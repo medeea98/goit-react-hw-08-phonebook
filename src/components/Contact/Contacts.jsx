@@ -8,6 +8,7 @@ import {
   deleteContacts,
   fetchContacts,
 } from '../../redux/contacts/operations';
+import { setFilter } from '../../redux/contacts/slice';
 import {
   selectFilter,
   selectAllContacts,
@@ -33,19 +34,17 @@ const Contacts = () => {
   };
 
   const handleFilterChange = filterValue => {
-    // dispatch(setFilter(filterValue));
-    console.log('test');
+    console.log(filterValue);
+    dispatch(setFilter(filterValue));
   };
 
-  //   const filterContacts = contacts.filter(contact => {
-  //     console.log(contact);
-  //     return (
-  //       typeof contact.name === 'string' &&
-  //       contact.name.toLowerCase().includes(filter.toLowerCase())
-  //     );
-  //   });
+  const filterContacts = contacts.filter(contact => {
+    return (
+      typeof contact.name === 'string' &&
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  });
 
-  console.log(contacts);
   return (
     <div>
       <h1>Phonebook</h1>
@@ -55,7 +54,7 @@ const Contacts = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <ContactList contacts={contacts} onDelete={handleDelete} />
+        <ContactList contacts={filterContacts} onDelete={handleDelete} />
       )}
     </div>
   );

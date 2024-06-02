@@ -39,6 +39,8 @@ export const App = () => {
             <PrivateRoute redirectTo="/login" component={<Contacts />} />
           }
         />
+
+        <Route path="/goit-react-hw-08-phonebook" element={<HomePage />} />
       </Route>
     </Routes>
   );
